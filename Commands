@@ -8,8 +8,8 @@ docker run -p 9000:9000 -it awd-pinot /bin/bash
 ./pinot-admin.sh StartBroker &
 ./pinot-admin.sh StartServer &
 # adding offline data
-./pinot-admin.sh AddSchema -schemaFile examples/batch/baseBallStats/baseballStats_schema.json -exec
-./pinot-admin.sh AddTable -tableConfig examples/batch/baseBallStats/baseballStats_offline_table_config.json -exec
-./pinot-admin.sh LaunchDataIngestionJob -jobSpecFile examples/batch/baseBallStats/ingestionJobSpec.yaml 
-    prestep: change the inputDirURI
-    prestep: change the outputDirURI 
+./pinot-admin.sh AddSchema -schemaFile ../examples/batch/baseballStats/baseballStats_schema.json -exec
+./pinot-admin.sh AddTable -tableConfig ../examples/batch/baseBallStats/baseballStats_offline_table_config.json -exec
+./pinot-admin.sh LaunchDataIngestionJob -jobSpecFile ../examples/batch/baseballStats/ingestionJobSpec.yaml 
+    prestep: change the inputDirURI="../examples/batch/baseballStats/rawdata/baseballStats_data.csv"
+    prestep: change the outputDirURI="../examples/batch/baseballStats/segments"
