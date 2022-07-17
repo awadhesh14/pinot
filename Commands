@@ -1,0 +1,15 @@
+
+# setting up cluster (really?)
+docker build . -t awd-pinot 
+docker run -p 9000:9000 -it awd-pinot /bin/bash 
+# starting pinot
+./pinot-admin.sh StartZookeeper &
+./pinot-admin.sh StartController &
+./pinot-admin.sh StartBroker &
+./pinot-admin.sh StartServer &
+# adding offline data
+./pinot-admin.sh AddSchema -schemaFile examples/batch/baseBallStats/baseballStats_schema.json -exec
+./pinot-admin.sh AddTable -tableConfig examples/batch/baseBallStats/baseballStats_offline_table_config.json -exec
+./pinot-admin.sh LaunchDataIngestionJob -jobSpecFile examples/batch/baseBallStats/ingestionJobSpec.yaml 
+    prestep: change the inputDirURI
+    prestep: change the outputDirURI 
